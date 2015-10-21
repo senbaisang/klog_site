@@ -4,7 +4,7 @@ load 'deploy/assets'
 SSH_USER = 'ubuntu'
 ssh_options[:port] = 35250
 set :rake, "bundle exec rake"
-set :application, "sally"
+set :application, "shuanglei_blog"
 set :repository, "."
 set :scm, :none
 set :deploy_via, :copy
@@ -15,7 +15,7 @@ role :app, server
 role :db,  server, :primary => true
 role :db,  server
 
-set :deploy_to, "/opt/app/sally"
+set :deploy_to, "/opt/app/shuanglei"
 default_run_options[:pty] = true
 
 # change to your username
