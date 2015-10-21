@@ -6,7 +6,7 @@ working_directory app_root
 preload_app true
 
 listen 8041, :tcp_nopush => false
-listen app_toor + "/tmp/unicorn.klog.sock", :backlog => 64
+listen app_root + "/tmp/unicorn.klog.sock", :backlog => 64
 
 pid "#{app_root}/tmp/pids/unicorn.pid"
 stderr_path "#{app_root}/log/unicorn.log"
