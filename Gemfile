@@ -64,6 +64,7 @@ gem 'unicorn-worker-killer'
 gem 'newrelic_rpm'
 # Use Capistrano for deployment
 gem 'capistrano'
+gem 'thin'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
