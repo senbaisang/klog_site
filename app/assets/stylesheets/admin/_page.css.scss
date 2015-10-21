@@ -1,0 +1,198 @@
+.page-list {
+
+  .panel-heading {
+    h2 {
+      float: left;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      padding-left: 20px;
+      margin: 0;
+    }
+  }
+
+  .list-group {
+    overflow: auto;
+    height: calc(100% - 40px);
+  }
+
+  .list-group-item {
+    padding-left: 19px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: whitesmoke;
+
+      .tools {
+        opacity: 1;
+      }
+    }
+  }
+
+  .list-group-item.ng-leave {
+    -webkit-transition: all 1s ease-in all; /* Safari/Chrome */
+    -moz-transition: all 1s linear all; /* Firefox */
+    -o-transition: all 1s linear all; /* Opera */
+    height: 0;
+  }
+
+  .list-group-item.active {
+    .tools {
+      opacity: 1;
+    }
+  }
+
+  .list-group-item.warning {
+    background: lighten($yellow, 40%);
+  }
+
+  .list-group-item-text {
+    color: $gray-light;
+    span {
+      margin-right: 10px;
+    }
+  }
+
+  // 排序链接
+  .tools {
+    opacity: 0;
+    @include transition(opacity 500ms);
+
+    a {
+      font-size: 16px;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .disabled {
+      font-size: 16px;
+      color: #ccc;
+    }
+  }
+}
+
+.page-preview {
+  height: 100%;
+
+  &.editing {
+    width: 37.5%;
+  }
+
+  .panel-heading {
+    @include clearfix();
+    background: white;
+    padding: 10px 15px 10px 30px;
+
+    h2 {
+      margin: 0;
+      a {
+        i {
+          font-size: 15px;
+          display: none;
+        }
+      }
+
+      a:hover {
+        color: $link-color;
+        i {
+          display: inline;
+        }
+      }
+    }
+
+    .actions {
+      margin-top: 3px;
+    }
+  }
+
+  .content {
+    height: calc(100% - 57px);
+    overflow: auto;
+    margin: 0 10px 0 30px;
+    padding-right: 5px;
+
+    > div {
+      max-width: 800px;
+    }
+  }
+}
+
+// 编辑器
+.page-editor {
+  height: 100%;
+  width: 37.5%;
+
+  input, textarea {
+    @include no-border-input();
+  }
+
+  // override error
+  input.ng-invalid {
+    &, &:focus {
+      border-color: transparent;
+      @include box-shadow(none);
+    }
+  }
+
+  // 标题
+  .panel-heading {
+    padding: 2 20px;
+    background: white;
+
+    input, button {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    input {
+      padding: 0 12px;
+    }
+
+    // 标题
+    .title {
+      width: 60%;
+      font-size: 28px;
+      border-right: 1px solid $gray-lighter;
+      font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+    }
+
+    .slug {
+      width: calc(40% - 105px);
+      font-size: 16px;
+    }
+  }
+
+  .panel-body {
+    position: relative;
+    height: calc(100% - 55px);
+    padding: 15px 10px 0 20px;
+
+    textarea {
+      height: 100%;
+    }
+
+    // 上传、提示等按钮
+    .tools {
+      position: absolute;
+      right: 15px;
+      top: 5px;
+
+      > a {
+        margin-right: 5px;
+        text-decoration: none;
+        color: #000;
+        opacity: 0.3;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        i {
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
+}

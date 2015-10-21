@@ -1,0 +1,98 @@
+<div class="row full-height setting-wrap">
+    <div class="col-md-1 nav-wrap">
+        <div ng-include="relativeUrl('./nav.html')"></div>
+    </div>
+    <div class="col-md-11 full-height panel-wrap">
+        <div class="panel panel-default full-height">
+            <div class="panel-body full-height">
+                <form class="form-horizontal website-form" name="form" ng-submit="save()" validation="website">
+                    <fieldset>
+                        <legend>Blog</legend>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">名称</label>
+
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="website.title" name="title" required/>
+
+                                <div error-for="form.title"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">描述</label>
+
+                            <div class="col-md-5">
+                                <textarea class="form-control" rows="4" ng-model="website.sub_title"></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>作者</legend>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">姓名</label>
+
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="website.author" name="author"
+                                       required/>
+
+                                <div error-for="form.author"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">头像</label>
+
+                            <div class="col-md-5">
+                                <div class="avatar">
+                                    <img ng-src="{{website.avatar}}" width="200" height="200"/>
+                                    <a href="" file-input="uploadAvatar(files)" accept=".jpg, .jpeg, .gif, .png">上传新头像</a>
+                                    <div class="mask" ng-show="avatarAttach.originalFile">
+                                        上传 {{ avatarAttach.originalFile.percent | number:0 }} %
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">Github</label>
+
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" ng-model="website.github"
+                                       placeholder="Github 用户名"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">新浪微博</label>
+
+                            <div class="col-md-5">
+                                <input type="url" class="form-control" name="weibo" ng-model="website.weibo"
+                                       placeholder="微博用户主页 URL"/>
+
+                                <div error-for="form.weibo"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-1 control-label">捐助链接</label>
+
+                            <div class="col-md-5">
+                                <input type="url" class="form-control" name="donate" ng-model="website.donate"/>
+
+                                <div error-for="form.donate"></div>
+                                <span class="help-block"> 推荐使用 <a target="_blank"
+                                                                  href="http://help.alipay.com/lab/help_detail.htm?help_id=248229">支付宝收款主页</a></span>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                        <label class="col-md-1 control-label"></label>
+
+                        <div class="col-md-5">
+                            <button type="submit" class="btn btn-primary btn-lg" loading-btn
+                                    loading-cancel="website.$resolved">保 存
+                            </button>
+                            <span class="save-success" ng-show="saveSuccess"><i
+                                    class="fa fa-check-circle"></i> 保存成功</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,164 @@
+// 设置
+.setting-wrap {
+  .nav-wrap {
+    padding-right: 0;
+    padding-top: 25px;
+    margin-right: -3px;
+    z-index: 1000;
+    width: 130px;
+  }
+
+  .panel-wrap {
+    padding-left: 0;
+    width: calc(100% - 130px);
+  }
+
+  .panel-body {
+    padding: 30px 50px;
+    overflow: auto;
+  }
+
+  legend {
+    padding-left: 10px;
+    padding-bottom: 5px;
+    font-weight: bolder;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+
+    .form-control {
+      width: 400px;
+    }
+
+    .help-block {
+      margin-bottom: 0;
+
+      a {
+        color: lighten($link-color, 10%);
+      }
+    }
+  }
+
+  .website-form {
+    .control-label {
+      width: 120px;
+    }
+
+    // 头像
+    .avatar {
+      position: relative;
+      width: 200px;
+
+      img {
+        border-radius: 10px;
+      }
+
+      a {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background: #333;
+        padding: 10px 0;
+        opacity: 0.9;
+        display: none;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+        &:hover {
+          color: white;
+        }
+      }
+
+      .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #ccc;
+        opacity: 0.9;
+        color: white;
+        text-align: center;
+        padding-top: 40%;
+        font-size: 16px;
+        border-radius: 10px;
+      }
+
+      &:hover {
+        a {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .intro {
+    border-bottom: 1px solid $gray-lighter;
+    margin-bottom: 40px;
+    padding: 20px;
+
+    p {
+      margin-bottom: 20px;
+      line-height: 2;
+    }
+  }
+
+  // 分类
+  .category-wrap {
+    > table {
+      max-width: 800px;
+
+      td {
+        border-top-style: dashed;
+      }
+    }
+
+    // 添加的表单
+    .form-add {
+      width: 350px;
+      margin-bottom: 30px;
+      margin-left: 8px;
+    }
+
+    // 修改的表单
+    .form-edit {
+      margin: 10px 0;
+
+      .form-group {
+        margin-bottom: 0;
+        width: 350px;
+
+        .form-control {
+          width: 100%;
+        }
+      }
+
+      a {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .attach-wrap {
+    a.action {
+      margin-left: 20px;
+      color: $gray-light;
+      opacity: 0;
+      @include transition(opacity 500ms)
+    }
+
+    tr:hover {
+      a.action {
+        opacity: 1;
+      }
+    }
+  }
+
+  .ga-form {
+    .control-label {
+      width: 180px;
+    }
+  }
+}

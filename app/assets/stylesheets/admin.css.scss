@@ -1,0 +1,372 @@
+$blue: #36a9e1;
+$blue-dark: darken($blue, 10%);
+$blue-light: lighten($blue, 10%);
+$blue-lighter: lighten($blue, 40%);
+$red: #E64E5F;
+$yellow: #D6D02D;
+
+$link-color: $blue;
+
+$navbar-border-radius: 0;
+$navbar-inverse-link-active-bg: $blue;
+
+$btn-primary-bg: $blue;
+$btn-primary-border: $blue-dark;
+$btn-danger-bg: $red;
+//$btn-warning-bg: $yellow;
+//$btn-warning-border: darken($yellow, 5%);
+
+@import "bootstrap";
+@import "font-awesome";
+@import "compass/css3";
+
+body {
+  background: #eee;
+  font-family: Helvetica, Tahoma, Arial, SimSun, "宋体", Heiti, "黑体", sans-serif;
+}
+
+h1, h2, h3, h4 {
+  font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+}
+
+textarea {
+  resize: none;
+}
+
+@mixin no-border-input() {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+// 校验报错
+.ng-submitted {
+  input.ng-invalid {
+    border-color: $red;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+
+    &:focus {
+      border-color: #843534;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
+    }
+  }
+}
+
+.error {
+  color: darken($red, 10%);
+  margin-top: 3px;
+}
+
+// 出错提示
+.popover-error {
+  max-width: none;
+
+  &.top .tooltip-arrow {
+    border-top-color: $red;
+  }
+
+  &.bottom .tooltip-arrow {
+    border-bottom-color: $red;
+  }
+
+  .tooltip-inner {
+    padding: 5px 15px;
+    font-size: 14px;
+    line-height: 1.8em;
+    background: $red;
+    color: $gray-lighter;
+    text-align: left;
+  }
+}
+
+// 保存成功
+.save-success {
+  color: #3c763d;
+  margin-left: 10px;
+}
+
+// 导航栏
+.nav-tabs.nav-stacked {
+  border-bottom: 0;
+}
+
+.nav-tabs.nav-stacked {
+  > li {
+    margin-bottom: 5px;
+
+    a {
+      border-radius: 4px 0 0 4px;
+      border-color: transparent;
+    }
+
+    a:hover {
+      background: darken(#eee, 10%);
+    }
+
+    &.active {
+      > a {
+        &,
+        &:hover,
+        &:focus {
+          border: 1px solid $nav-tabs-active-link-hover-border-color;
+          border-right-color: transparent;
+          background: white;
+        }
+      }
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-button:vertical {
+  background-color: transparent;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #CCCCCC;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+  height: 5px;
+  background-color: #999999;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  width: 5px;
+  background-color: #CCCCCC;
+  border-radius: 6px;
+}
+
+.modal {
+  display: block;
+}
+
+// 登录
+.session-form {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 300px;
+
+  .btn {
+    font-weight: bold;
+    height: 46px;
+  }
+}
+
+// 导航栏
+.navbar-admin {
+  border: 0;
+  padding: 0 30px;
+  z-index: 10;
+
+  .navbar-header {
+    width: 140px;
+    height: 1px;
+  }
+
+  // logo
+  .navbar-brand {
+    background: asset-url('logo.png') no-repeat 0 center;
+    position: absolute;
+    width: 140px;
+    height: 70px;
+
+    &:hover {
+      background-position: -140px center;
+    }
+
+  }
+
+  // 标题
+  //  .navbar-brand {
+  //    color: $red;
+  //    font-weight: bolder;
+  //    font-size: 32px;
+  //    line-height: 50px;
+  //    margin-right: 20px;
+  //    padding: 0;
+  //    width: 110px;
+
+  //    &:hover {
+  //      color: $blue
+  //    }
+}
+
+// 最右扳手
+.navbar-right {
+  margin-right: 0px !important;
+
+  .dropdown > a {
+    padding: 0 15px;
+    font-size: 1.5em;
+    line-height: 50px;
+  }
+
+  .dropdown-menu li {
+    height: 30px;
+    line-height: 30px;
+
+    i {
+      width: 18px;
+    }
+  }
+}
+
+// ajax 指示器
+.ajax-spinner {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  border-radius: 0 0 5px 5px;
+  color: #c09853;
+  text-align: center;
+  padding: 8px 0;
+  background: #FCF6CF;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  @include transition(all cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s);
+
+  .icon-spin {
+    -webkit-animation: spin 0.7s infinite linear;
+    animation: spin 0.7s infinite linear;
+  }
+}
+
+.ajax-spinner.show {
+  top: 48px;
+}
+
+.main {
+  position: absolute;
+  top: 80px;
+  bottom: 10px;
+  left: 30px;
+  right: 30px;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.confirm-dialog {
+  width: 400px;
+}
+
+// 通用的 panel
+.panel-blue {
+  border-color: #ccc;
+  height: 100%;
+
+  .panel-heading {
+    background: $blue;
+    border-bottom: 0;
+    color: white;
+    padding: 0;
+
+    // 右侧工具
+    > ul {
+      float: right;
+      background: $blue-dark;
+      list-style-type: none;
+      padding-left: 0;
+      height: 40px;
+      line-height: 40px;
+      margin-bottom: 0;
+      border-top-right-radius: 3px;
+
+      > li {
+        float: left;
+        border-left: 1px solid $blue-light;
+        height: 100%;
+
+        > a {
+          color: white;
+          display: block;
+          padding: 0 20px;
+          opacity: 0.6;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .list-group-item.active {
+    background: $blue-lighter;
+    border-color: #ddd;
+    border-left: 4px solid $blue-dark;
+    color: #333;
+  }
+}
+
+// 上传的附件列表显示
+.upload-attaches {
+  max-height: 170px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 5px;
+  list-style: none;
+  padding: 5px 10px;
+
+  li {
+    width: 250px;
+
+    &:first-child {
+      border-top: none;
+    }
+  }
+
+  .title {
+    display: inline-block;
+    margin-right: 10px;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  .progress {
+    height: 10px;
+    width: 120px;
+    display: inline-block;
+    margin-bottom: 0;
+  }
+
+  .action {
+    text-decoration: none;
+    display: inline-block;
+    padding: 2px 5px;
+    float: right;
+    color: #000;
+    opacity: 0.3;
+
+    &:hover {
+      opacity: 0.8;
+      background: white;
+    }
+  }
+}
+
+@import './admin/blog';
+@import './admin/blog_form';
+@import './admin/comment';
+@import './admin/page';
+@import './admin/setting';
+@import './admin/dashboard';

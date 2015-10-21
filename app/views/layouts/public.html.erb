@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <title><%= title (yield :title) %></title>
+
+  <meta charset="UTF-8"/>
+  <%= yield :seo %>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="renderer" content="webkit"/>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <%= auto_discovery_link_tag(:rss, feed_path(:format => :rss), :title => Setting.website.title) %>
+
+  <%= stylesheet_link_tag "public", media: "all", "data-turbolinks-track" => true %>
+  <% if os.mac? %>
+      <style>
+          body, h1, h2, h3, h4 {
+              font-family: Helvetica, Tahoma, Arial, "Hiragino Sans GB", STXihei, "华文细黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
+          }
+      </style>
+  <% end %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
+  <!--[if lt IE 9]>
+    <%= javascript_include_tag "html5shiv" %>
+    <%= javascript_include_tag "respond" %>
+  <![endif]-->
+
+  <%= render :partial => 'layouts/ga', :object => :head %>
+</head>
+<body>
+<div class="row" style="margin:0;">
+  <div class="col-md-3 col-sm-12 left">
+    <%= render "layouts/header" %>
+
+    <%= render_cell :nav, :show, @curr_nav %>
+  </div>
+  <div class="col-md-offset-3 col-md-9 col-sm-12 main">
+    <%= yield %>
+    <footer>
+      Copyright © 2014 - Chaos - Powered by <a href="https://github.com/edokeh/klog2">Klog2</a>
+    </footer>
+  </div>
+</div>
+<%= render :partial => 'layouts/ga', :object => :foot %>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" lang="zh">
+<head>
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="renderer" content="webkit"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title ng-bind="title"></title>
+
+  <%= stylesheet_link_tag "admin", media: "all" %>
+
+  <%= javascript_include_tag "xhr-shim.js" %>
+  <%= seajs_tag %>
+
+  <script>
+      seajs.config({
+          alias: {
+              'angularjs': 'angular/angularjs-all/1.2.7/index',
+              '_': 'gallery/underscore/1.4.4/underscore',
+              'selection': 'gallery/selection/0.9.0/selection',
+              'seajs-lazy-angular': 'angular/seajs-lazy-angular/0.0.1/seajs-lazy-angular',
+              'marked': 'gallery/marked/0.3.0/marked',
+              'bootstrap': 'angular/bootstrap/0.0.1/index',
+              'angular-highcharts': 'angular/angular-highcharts/3.0.7/angular-highcharts'
+          },
+          preload: ['seajs/seajs-text/1.0.2/seajs-text']
+      });
+  </script>
+  <style>
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+      }
+  </style>
+</head>
+<body ng-cloak>
+
+<nav class="navbar navbar-inverse navbar-admin" ng-controller="nav">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="/admin" style="width: 140px;"></a>
+  </div>
+  <ul class="nav navbar-nav">
+    <li ng-class="{active:item.active}" ng-repeat="item in navItems">
+      <a ng-href="#{{item.url}}">
+        <i ng-if="item.ico" class="fa {{item.ico}}"></i>
+        {{item.name}}
+      </a>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle"><i class="fa fa-wrench"></i></a>
+      <ul class="dropdown-menu">
+        <li><a href="https://github.com/edokeh/klog2" target="_blank"><i class="fa fa-info-circle"></i> 关于</a></li>
+        <li><a href="/" target="_blank"><i class="fa fa-external-link-square"></i> 查看首页</a></li>
+        <li><a href="" ng-click="logout()"><i class="fa fa-sign-out"></i> 退出后台</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<div ajax-spinner></div>
+
+<div class="main" ng-view>
+</div>
+<script>
+    var CSRF_TOKEN = "<%= form_authenticity_token %>";
+    var ADMIN_PATH = <%= seajs_modules('admin') %>[0];
+</script>
+<%= seajs_use 'admin/app' %>
+
+</body>
+</html>

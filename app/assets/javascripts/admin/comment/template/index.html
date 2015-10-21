@@ -1,0 +1,70 @@
+<div class="row full-height" ng-show="commentStat">
+    <div class="col-md-8 comment-list full-height" ng-if="commentStat.disqus_enable">
+        <div class="panel panel-blue">
+            <div class="panel-heading">
+                <h2>最近的 {{comments.length}} 条评论，共有 {{ commentStat.total }} 条</h2>
+                <ul>
+                    <li><a href="" title="刷新" ng-click="refresh()"><i class="fa fa-refresh"></i></a></li>
+                    <li><a href="http://disqus.com/admin/" title="Disqus 管理页面" target="_blank"><i class="fa fa-external-link"></i></a></li>
+                </ul>
+            </div>
+            <div class="list-group" scroll-top-percent="listScrollTop">
+                <div ng-if="comments.$resolved && blogs.length == 0">
+                    empty
+                </div>
+                <div class="list-group-item clearfix" ng-repeat="comment in comments"
+                     ng-class="{active: (comment.id === currComment.id)}">
+                    <div class="content">
+                        <a class="title" ng-href="/blog/{{ comment.blog.slug}}.html#comment-{{ comment.id }}"
+                           target="_blank">{{ comment.blog.title }}</a>
+                        <article ng-click="showComment(comment)" ng-bind-html="comment.content"></article>
+                        <footer>
+                            <span class="date">{{ comment.created_at |date:'yyyy-MM-dd HH:mm'  }}</span>
+                            <a class="action" href="" ng-click="replayComment(comment)"><i class="fa fa-reply"></i> 回复</a>
+                            <a class="action" href="" ng-click="remove($event, comment)"><i class="fa fa-trash-o"></i>
+                                删除</a>
+                        </footer>
+                    </div>
+                    <div class="author">
+                        <div class="detail">
+                            <h3>{{ comment.author_name }}</h3>
+                            <small><a href="mailto: {{comment.author_email}}">{{ comment.author_email }}</a></small>
+                            <small>{{ comment.ip }}</small>
+                        </div>
+                        <img ng-src="{{ comment.author_avatar }}"/>
+                    </div>
+                </div>
+                <div class="list-group-item" ng-show="$listPromise.$resolved">
+                    <a href="" ng-click="getComments(cursor)">查看更多...</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 comment-context full-height" ng-if="commentStat.disqus_enable">
+        <div class="panel panel-blue">
+            <div class="panel-heading">回复评论</div>
+            <div class="panel-body">
+                <article ng-style="{'margin-left': $index * 20 + 'px'}" ng-class="{quoted: $index > 0}"
+                         ng-repeat="comment in commentContext">
+                    <header>
+                        <strong>{{ comment.author_name }}</strong>
+                        <em>{{comment.created_at | date:'yyyy-MM-dd HH:mm' }}</em>
+                    </header>
+                    <section ng-bind-html="comment.content"></section>
+                </article>
+            </div>
+            <div class="reply">
+                <textarea class="form-control" rows="3" ng-model="newComment.content" placeholder="果断反击..." ng-keyup="shortcutCreate($event)" focus-if="focusReply"></textarea>
+                <button class="btn btn-primary pull-right" ng-click="create()" ng-disabled="!commentContext.$resolved || newComment.$requesting">回复</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md12 full-height" ng-if="!commentStat.disqus_enable">
+        <div class="panel panel-blue">
+            <div class="panel-body text-center" style="margin-top: 50px;">
+                <h3>尚未启用 Disqus</h3>
+                <h3><a href="#/setting/disqus"><i class="fa fa-play-circle"></i> 立刻启用</a></h3>
+            </div>
+        </div>
+    </div>
+</div>

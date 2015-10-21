@@ -1,0 +1,52 @@
+<% if controller_name == 'tags' %>
+    <article>
+      <h2><%= fa_icon "tag" %> <%= params[:id] %></h2>
+    </article>
+    <% content_for :title do %><%= "Tag - #{params[:id]}" %><% end %>
+<% end %>
+
+<% if controller_name == 'categories' %>
+    <article>
+      <h2><%= fa_icon "book" %> <%= params[:id] %></h2>
+    </article>
+    <% content_for :title do %><%= "分类 - #{params[:id]}" %><% end %>
+<% end %>
+
+<% @blogs.each do |blog| %>
+    <article>
+      <div class="misc clearfix">
+        <span class="item pull-right">
+          <%= fa_icon "comments" %>
+          <%= blog.comment_count %>条评论
+        </span>
+        <span class="item pull-right">
+          <%= fa_icon "calendar-o" %>
+          <%= l blog.created_at %>
+        </span>
+      </div>
+      <h2><%= link_to blog.title, blog_path(blog.slug) %></h2>
+
+      <div class="misc">
+        <% if blog.category.present? %>
+            <%= link_to fa_icon("book") + ' ' + blog.category.name, category_path(blog.category.name), :class => 'item' %>
+        <% end %>
+        <% if blog.tags.present? %>
+            <% blog.tags.each do |tag| %>
+                <%= link_to fa_icon("tag") + ' ' +tag.name, tag_path(tag.name), :class => 'item' %>
+            <% end %>
+        <% end %>
+      </div>
+      <div class="content">
+        <%= raw blog.html_content_summary %>
+      </div>
+      <div>
+        <%= link_to fa_icon("arrow-right") + " 阅读全文...", blog_path(blog.slug), :class => 'readmore' %>
+      </div>
+    </article>
+<% end %>
+
+<% if @blogs.num_pages > 1 %>
+<article>
+  <%= paginate @blogs, :theme=>'tiny' %>
+</article>
+<% end %>

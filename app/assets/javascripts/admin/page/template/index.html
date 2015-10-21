@@ -1,0 +1,129 @@
+<div class="row full-height">
+    <div class="col-md-3 page-list full-height">
+        <div class="panel panel-blue">
+            <div class="panel-heading clearfix">
+                <h2>{{pages.length}} 个页面</h2>
+                <ul>
+                    <li><a href="" ng-click="add()"><i class="fa fa-plus"></i></a></li>
+                </ul>
+            </div>
+            <div class="list-group" scroll-top-percent="listScrollTop">
+                <div class="list-group-item clearfix" ng-repeat="page in pages" ng-click="showPage(page)"
+                     ng-class="{active: (page.id === currPage.id)}">
+                    <div class="pull-left">
+                        <h4 class="list-group-item-heading">
+                            {{ page.title }} &nbsp;
+                        </h4>
+
+                        <p class="list-group-item-text" ng-show="page.id">
+                            <span><i class="fa fa-clock-o"></i> {{ page.created_at | date:'yyyy-MM-dd HH:mm'}}</span>
+                        </p>
+
+                        <p class="list-group-item-text" ng-show="!page.id">
+                            &nbsp;
+                        </p>
+                    </div>
+                    <div class="pull-right tools">
+                        <a href="" ng-click="up(page, $event)" ng-show="!$first"><i class="fa fa-arrow-up"></i></a>
+                        <span class="disabled" ng-show="$first"><i class="fa fa-arrow-up"></i></span>
+                        <a href="" ng-click="down(page, $event)" ng-show="!$last"><i
+                                class="fa fa-arrow-down"></i></a>
+                        <span class="disabled" ng-show="$last"><i class="fa fa-arrow-down"></i></span>
+                    </div>
+                </div>
+                <div class="list-group-item warning clearfix" ng-if="newPage" ng-click="startAdd()" ng-class="{active: (page.id === currPage.id)}">
+                    <h4 class="list-group-item-heading">
+                        {{ newPage.title }} &nbsp;
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 page-editor" ng-show="editing">
+        <form class="panel panel-default full-height" ng-submit="save($event)" name="form" validation="page">
+            <div class="panel-heading">
+                <input class="form-control title" type="text" ng-model="currPage.title" placeholder="页面标题" required
+                       ng-minlength="2" maxlength="10" name="title"/>
+                <input class="form-control slug" type="text" ng-model="currPage.slug" placeholder="Slug" name="slug"
+                       server-valid="serverError"/>
+                <button class="btn btn-primary btn-sm" name="submitBtn">保存</button>
+                <button class="btn btn-default btn-sm" ng-click="currPage.id ? dropUpdate() : dropCreate()" type="button">取消</button>
+
+                <div class="tooltip bottom fade popover-error" popover-window="errorTrigger">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner">
+                        <div ng-repeat="(name,error) in form.$errorMessages">
+                            <i class="fa fa-times-circle"></i> {{error}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <textarea class="form-control" ng-model="currPage.content" selection="contentSel"
+                          scroll-top-percent="scrollTopPercent" required ng-minlength="3" name="content"></textarea>
+
+                <div class="tools">
+                    <a href="" file-input="doUpload(files)" multiple="true" accept="{{UPLOAD_FILE_TYPES}}"
+                       title="上传图片或附件">
+                        <i class="fa fa-upload"></i>
+                    </a>
+                    <a href="" popover-trigger="attachTrigger" popover-show="attachShow"
+                       ng-show="currPage.attaches.length > 0">
+                        <i class="fa fa-paperclip"></i>
+                    </a>
+
+                    <div class="popover bottom fade" popover-window="attachTrigger">
+                        <div class="arrow"></div>
+                        <ul class="upload-attaches">
+                            <li ng-repeat="attach in currPage.attaches" class="clearfix">
+                                <a title="{{attach.file_name}}" ng-href="{{attach.file.url}}" ng-if="attach.id"
+                                   class="title pull-left" target="_blank">
+                                    {{attach.file_name}}
+                                </a>
+
+                                <div class="title pull-left" style="width:100px" ng-if="!attach.id">
+                                    {{attach.originalFile.name}}
+                                </div>
+
+                                <div class="pull-right">
+                                    <div class="progress progress-striped active" ng-if="!attach.id">
+                                        <div class="progress-bar"
+                                             ng-style="{width: attach.originalFile.percent+'%'}">
+                                            <span class="sr-only">{{attach.originalFile.percent}}% Complete</span>
+                                        </div>
+                                    </div>
+                                    <a ng-if="attach.id" class="action" title="删除附件" ng-click="removeAttach(attach)"
+                                       href="">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                    <a ng-if="attach.id" class="action" title="插入文章" ng-click="insertCode(attach)"
+                                       href="">
+                                        <i class="fa fa-link"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-9 page-preview" ng-class="{editing: editing}">
+        <div class="panel panel-blue" ng-show="currPage">
+            <div class="panel-heading">
+                <h2 class="pull-left">
+                    <a ng-href="/page/{{currPage.slug}}.html" target="_blank">{{currPage.title }} <i
+                            class="fa fa-external-link"></i></a>
+                </h2>
+
+                <div class="actions pull-right" ng-show="!editing">
+                    <a href="" class="btn btn-primary" ng-click="startEdit()"><i class="fa fa-edit"></i> 修改</a>
+                    <a href="" class="btn btn-danger" ng-click="remove(currPage)"><i class="fa fa-trash-o"></i> 删除</a>
+                </div>
+            </div>
+
+            <div class="content" ng-bind-html="currPage.html_content"
+                 scroll-top-percent="scrollTopPercent"></div>
+        </div>
+    </div>
+</div>

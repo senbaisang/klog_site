@@ -1,0 +1,36 @@
+seajs_path: seajs/seajs/2.1.1/sea.js
+family: klog
+output:
+  relative:
+    - admin/app.js
+    - admin/blog/index.js:
+      - admin/blog/index.js
+      - admin/blog/template/*.html.js
+    - admin/blog-form/index.js:
+      - admin/blog-form/index.js
+      - admin/blog-form/template/*.html.js
+    - admin/comment/index.js:
+      - admin/comment/index.js
+      - admin/comment/template/*.html.js
+    - admin/editor/index.js:
+      - admin/editor/index.js
+      - admin/editor/template/*.html.js
+    - admin/page/index.js:
+       - admin/page/index.js
+       - admin/page/template/*.html.js
+    - admin/setting/index.js:
+       - admin/setting/index.js
+       - admin/setting/template/*.html.js
+    - admin/dashboard/index.js:
+       - admin/dashboard/index.js
+       - admin/dashboard/template/*.html.js
+  all: []
+alias:
+  angular-all: angular-all
+  angularjs: angularjs
+  _: _
+  selection: selection
+  seajs-lazy-angular: seajs-lazy-angular
+  marked: marked
+  bootstrap: bootstrap
+  angular-highcharts: angular-highcharts

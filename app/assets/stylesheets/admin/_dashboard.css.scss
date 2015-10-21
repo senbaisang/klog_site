@@ -1,0 +1,110 @@
+.dashboard-widget {
+  height: 250px;
+  margin-bottom: 30px;
+
+  .panel {
+    padding: 10px 20px;
+
+    h2 {
+      margin: 5px 0 10px 0;
+      font-size: 20px;
+    }
+
+    small {
+      color: $gray-light;
+      font-size: 14px;
+      margin-left: 5px;
+
+      a {
+        color: $gray-light;
+        opacity: 0.6;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    // 其他说明
+    .others {
+      font-size: 12px;
+      color: $gray-light;
+      position: absolute;
+      bottom: 5px;
+      right: 20px;
+    }
+  }
+
+  // 载入中
+  .panel-pending {
+    background: asset-url("coffee.gif") white no-repeat center;
+  }
+
+  // 载入失败
+  .panel-failed {
+    .panel-error {
+      display: table;
+    }
+  }
+
+  .panel-error {
+    display: none;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+
+    .panel-error-inner {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+
+  // 载入成功
+  .panel-success {
+    .panel-body {
+      display: block;
+    }
+  }
+
+  .panel-body {
+    display: none;
+    padding: 0;
+  }
+
+  // 第一个统计面板
+  .statistics {
+    text-align: center;
+
+    .total-visits {
+      margin-top: 10px;
+
+      strong {
+        font-size: 80px;
+      }
+    }
+
+    .stat-count {
+      span {
+        margin-right: 20px;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+
+      strong {
+        font-size: 50px;
+      }
+    }
+  }
+}
+
+// 同步日志
+.sync-modal {
+  width: 400px;
+
+  ul {
+    padding-left: 0;
+    list-style: none;
+  }
+}

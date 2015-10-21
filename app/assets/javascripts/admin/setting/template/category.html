@@ -1,0 +1,66 @@
+<div class="row full-height setting-wrap">
+    <div class="col-md-1 nav-wrap">
+        <div ng-include="relativeUrl('./nav.html')"></div>
+    </div>
+    <div class="col-md-11 full-height panel-wrap">
+        <div class="panel panel-default full-height">
+            <div class="panel-body full-height category-wrap">
+                <form class="form-inline form-add" name="addForm" ng-submit="add()" validation="category">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="name" ng-model="newCategory.name"
+                               placeholder="分类名称" required ng-minlength="2" server-valid="addServerError" />
+
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-primary" loading-btn="" loading-cancel="newCategory.$resolved">添加分类</button>
+                        </div>
+                    </div>
+                    <div error-for="addForm.name"></div>
+                </form>
+                <table class="table table-hover">
+                    <col width="40%"/>
+                    <col/>
+                    <col/>
+                    <col width="150px"/>
+                    <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th class="text-right">文章数</th>
+                        <th>创建时间</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat-start="category in categories" ng-show="category != editingCategory">
+                        <td ng-dblclick="edit(category)">{{ category.name }}</td>
+                        <td class="text-right">{{ category.blog_count }}</td>
+                        <td>{{ category.created_at |date:'yyyy-MM-dd HH:mm' }}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-default" ng-click="edit(category)">修改</button>
+                                <button class="btn btn-default" ng-click="remove(category)">删除</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-if="category == editingCategory" ng-repeat-end>
+                        <td colspan="4">
+                            <form class="form-inline form-edit" ng-submit="update(category, editForm)" name="editForm" validation="category" ng-init="clearEditError()">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="name" ng-model="category.name"
+                                               placeholder="分类名称" required ng-minlength="2" server-valid="editServerError" />
+
+                                        <div class="input-group-btn">
+                                            <button type="submit" class="btn btn-primary" loading-btn loading-cancel="editingCategory.$resolved">保存修改</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="" ng-click="cancelEdit(category)">取消</a>
+
+                                <div error-for="editForm.name"></div>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
